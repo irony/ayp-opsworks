@@ -44,9 +44,9 @@ when 'centos','redhat','fedora','amazon'
     end
   end
   
-  execute "Set permission to run node on port 80" do
-    command "sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/node "
-  end
+  ##execute "Set permission to run node on port 80" do
+  ##  command "sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/node "
+  ##end
 
 end
 
