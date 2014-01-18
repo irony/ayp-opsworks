@@ -1,8 +1,2 @@
 exports.db = <%= @database.to_json %>
 exports.memcached = <%= @memcached.to_json %>
-exports.config = {}
-exports.config.mongoUrl = <%= #{node[:nodeconfig][:mongoUrl]} %>
-exports.config.apiHost = <%= #{node[:nodeconfig][:apiHost]} %>
-exports.config.port = <%= #{node[:nodeconfig][:port]} %>
-exports.config.useProxiedHttp = <%= #{node[:nodeconfig][:useProxiedHttp]} %>
-exports.config.logentriesToken = "<%= @logentriesToken %>"
