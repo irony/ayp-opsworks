@@ -10,6 +10,10 @@ node[:deploy].each do |application, deploy|
   Chef::Log.debug(node[:nodeconfig].to_json)
 
 
+  file File.join(deploy[:deploy_to], 'node_modules', 'config', 'index.json') do
+    content JSON.dump(node[:config].to_hash)
+  end
+
   template "#{deploy[:deploy_to]}/shared/config/opsworks.js" do
     cookbook 'opsworks_nodejs'
     source 'opsworks.js.erb'
