@@ -8,8 +8,10 @@ node[:deploy].each do |application, deploy|
   Chef::Log.debug(node[:nodeconfig])
   Chef::Log.debug("node[:nodeconfig].to_json")
   Chef::Log.debug(node[:nodeconfig].to_json)
-  Chef::Log.debug("node[:nodeconfig].to_hash")
-  Chef::Log.debug(node[:nodeconfig].to_hash)
+
+  file File.join(deploy[:deploy_to], 'shared', 'node_modules', 'config', 'index.json') do
+    content JSON.dump(node[:nodeconfig].to_hash)
+  end
 
   template "#{deploy[:deploy_to]}/shared/node_modules/config/index.js" do
     cookbook 'opsworks_nodejs'
@@ -21,8 +23,7 @@ node[:deploy].each do |application, deploy|
       :config => node[:nodeconfig].to_hash,
       :database => node[:mongodb],
       :memcached => deploy[:memcached],
-      :layers => node[:opsworks][:layers],
-      :logentriesToken => node[:logentries][node[:opsworks][:instance][:hostname]]
+      :layers => node[:opsworks][:layers]
     )
   end
 end
