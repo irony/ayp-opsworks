@@ -8,6 +8,8 @@ node[:deploy].each do |application, deploy|
   Chef::Log.debug(node[:nodeconfig])
   Chef::Log.debug("node[:nodeconfig].to_json")
   Chef::Log.debug(node[:nodeconfig].to_json)
+  Chef::Log.debug("node[:nodeconfig].to_hash")
+  Chef::Log.debug(node[:nodeconfig].to_hash)
 
   template "#{deploy[:deploy_to]}/shared/node_modules/config/index.js" do
     cookbook 'opsworks_nodejs'
@@ -16,7 +18,7 @@ node[:deploy].each do |application, deploy|
     owner deploy[:user]
     group deploy[:group]
     variables(
-      :config => node[:config].to_hash,
+      :config => node[:nodeconfig].to_hash,
       :database => node[:mongodb],
       :memcached => deploy[:memcached],
       :layers => node[:opsworks][:layers],
