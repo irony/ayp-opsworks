@@ -1,6 +1,6 @@
 check host node_web_app_<%= @application_name %> with address 127.0.0.1
-  start program = "/bin/sh -c 'cd <%= @deploy[:deploy_to] %>/current; /usr/bin/env NODE_PATH=<%= @deploy[:deploy_to] %>/current/node_modules:<%= @deploy[:deploy_to] %>/current NODE_ENV=production /usr/local/bin/node index.js &>> /var/log/node.log'"
-  stop program  = "/usr/bin/pkill -f 'node index.js'"
+  start program = "/bin/sh -c 'cd <%= @deploy[:deploy_to] %>/current; /usr/bin/env NODE_PATH=<%= @deploy[:deploy_to] %>/current/node_modules:<%= @deploy[:deploy_to] %>/current NODE_ENV=production /usr/local/bin/node <%= @deploy[:deploy_to] %>/current/index.js &>> /var/log/node.log'"
+  stop program  = "/usr/bin/pkill -f 'node <%= @deploy[:deploy_to] %>/current/index.js'"
   if failed port 3000 protocol HTTP
     request /
     with timeout 10 seconds
