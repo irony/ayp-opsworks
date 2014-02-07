@@ -16,8 +16,8 @@ node[:deploy].each do |application, deploy|
     owner deploy[:user]
     group deploy[:group]
     variables(
-      :config => node[:nodeconfig].to_hash,
-      :database => node[:mongodb],
+      :config => deploy[:nodeconfig],
+      :database => deploy[:mongodb],
       :memcached => deploy[:memcached],
       :layers => node[:opsworks][:layers]
     )
